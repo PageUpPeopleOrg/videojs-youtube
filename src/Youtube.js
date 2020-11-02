@@ -42,6 +42,11 @@ THE SOFTWARE. */
     constructor: function(options, ready) {
       Tech.call(this, options, ready);
 
+      if (typeof document !== 'undefined'){
+        loadScript('https://www.youtube.com/iframe_api', apiLoaded);
+        injectCss();
+      }
+
       this.setPoster(options.poster);
       this.setSrc(this.options_.source, true);
 
@@ -783,11 +788,6 @@ THE SOFTWARE. */
   }
 
   Youtube.apiReadyQueue = [];
-
-  if (typeof document !== 'undefined'){
-    loadScript('https://www.youtube.com/iframe_api', apiLoaded);
-    injectCss();
-  }
 
   // Older versions of VJS5 doesn't have the registerTech function
   if (typeof videojs.registerTech !== 'undefined') {
